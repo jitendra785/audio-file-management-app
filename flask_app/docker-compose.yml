@@ -1,0 +1,56 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: audioapp-postgres
+    environment:
+      POSTGRES_DB: audioapp
+      POSTGRES_USER: audioapp_user
+      POSTGRES_PASSWORD: audioapp_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U audioapp_user -d audioapp"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:7.0
+    container_name: audioapp-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: audioapp_user
+      MONGO_INITDB_ROOT_PASSWORD: audioapp_password
+      MONGO_INITDB_DATABASE: audioapp
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/audioapp --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    container_name: audioapp-web
+    env_file:
+      - .env  # Read environment variables from .env file
+    environment:
+      APP_ENV: ${APP_ENV:-LOCAL}  # Use .env value or default to LOCAL
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    command: python src/main.py
+
+volumes:
+  postgres_data:
+  mongodb_data:

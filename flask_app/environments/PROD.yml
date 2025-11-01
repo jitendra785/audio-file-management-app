@@ -1,0 +1,35 @@
+app:
+  name: "Audio File Management App"
+  debug: false
+  secret_key: "CHANGE-THIS-TO-A-SECURE-RANDOM-KEY-IN-PRODUCTION"
+  host: "0.0.0.0"
+  port: 5000
+
+database:
+  postgres:
+    host: "postgres"  # Change to your production PostgreSQL host
+    port: 5432
+    database: "audioapp_prod"
+    username: "audioapp_user_prod"
+    password: "CHANGE-THIS-SECURE-PASSWORD"
+
+  mongodb:
+    host: "mongodb"  # Change to your production MongoDB host
+    port: 27017
+    database: "audioapp_prod"
+    username: "audioapp_user_prod"
+    password: "CHANGE-THIS-SECURE-PASSWORD"
+
+security:
+  password_min_length: 10  # Stricter in production
+  session_timeout_minutes: 30
+
+file_upload:
+  max_file_size_mb: 100  # Larger limit for production
+  allowed_extensions:
+    - "mp3"
+    - "wav"
+    - "ogg"
+    - "m4a"
+    - "flac"
+    - "aac"
