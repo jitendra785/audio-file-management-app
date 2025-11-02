@@ -39,7 +39,7 @@ A Flask web application for managing audio files with user authentication and ro
 ## Project Structure
 
 ```
-flask_app/
+audio-file-management-app/
 ├── environments/
 │   └── LOCAL.yml              # Environment configuration
 │
@@ -97,7 +97,7 @@ flask_app/
 
 1. **Navigate to the project directory:**
    ```bash
-   cd flask_app
+   cd audio-file-management-app
    ```
 
 2. **Build and start the containers:**
@@ -117,7 +117,7 @@ flask_app/
 
 1. **Navigate to the project directory:**
    ```bash
-   cd flask_app
+   cd audio-file-management-app
    ```
 
 2. **Install dependencies using Pipenv:**

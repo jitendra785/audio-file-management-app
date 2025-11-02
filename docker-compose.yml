@@ -36,8 +36,6 @@ services:
   web:
     build: .
     container_name: audioapp-web
-    env_file:
-      - .env  # Read environment variables from .env file
     environment:
       APP_ENV: ${APP_ENV:-LOCAL}  # Use .env value or default to LOCAL
     ports:
