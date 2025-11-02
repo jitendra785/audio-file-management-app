@@ -50,7 +50,7 @@ def init_db(app) -> None:
         admin_user = User.query.filter_by(username='Admin').first()
         if not admin_user:
             import bcrypt
-            password_hash = bcrypt.hashpw('Admin123'.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+            password_hash = bcrypt.hashpw('Admin1234'.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
             admin_user = User(
                 username='Admin',
                 email='admin@audioapp.com',
@@ -60,7 +60,7 @@ def init_db(app) -> None:
             )
             db.session.add(admin_user)
             db.session.commit()
-            print("Default admin user created: username='Admin', password='Admin123'")
+            print("Default admin user created: username='Admin', password='Admin'")
 
     # MongoDB configuration
     global _mongo_client, _mongo_db, _gridfs

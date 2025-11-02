@@ -1,7 +1,6 @@
 from typing import List, Optional, Dict, Any
 from werkzeug.datastructures import FileStorage
 from bson import ObjectId
-import os
 from datetime import datetime
 from dbentities.audio_file import AudioFile
 from dependencies.database import get_db_session, get_gridfs

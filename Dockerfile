@@ -18,7 +18,8 @@ COPY Pipfile ./
 RUN pipenv install --system --skip-lock
 
 # Copy application code
-COPY . .
+COPY src ./src
+COPY environments ./environments
 
 # Set environment variable
 ENV APP_ENV=LOCAL
